@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { io } from "socket.io-client";
 import ChatMobileBar from '../components/chat/ChatMobileBar.jsx';
 import ChatSidebar from '../components/chat/ChatSidebar.jsx';
@@ -19,6 +19,7 @@ import {
   addAIMessage,
   setChats
 } from '../store/chatSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,18 @@ const Home = () => {
     //   content: 'Hi there! I need assistance with my account.'
     // }
   ]);
+
+
+   const user=sessionStorage.getItem('user')
+    const  navigate=useNavigate()
+
+    useEffect(()=>{
+        if (user){
+            navigate('/')
+        }else{
+            navigate('/login')
+        }
+    },[user])
 
   const handleNewChat = async () => {
     // Prompt user for title of new chat, fallback to 'New Chat'
@@ -130,7 +143,6 @@ const Home = () => {
 
   }
 
-
 return (
   <div className="chat-layout minimal">
     <ChatMobileBar
@@ -148,13 +160,17 @@ return (
       onNewChat={handleNewChat}
       open={sidebarOpen}
     />
+    
     <main className="chat-main" role="main">
       {messages.length === 0 && (
+      <div>
+        
         <div className="chat-welcome" aria-hidden="true">
           <div className="chip">Early Preview</div>
           <h1>ChatGPT Clone</h1>
           <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off.</p>
         </div>
+      </div>
       )}
       <ChatMessages messages={messages} isSending={isSending} />
       {

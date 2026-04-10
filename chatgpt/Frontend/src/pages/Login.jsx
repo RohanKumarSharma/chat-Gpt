@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
@@ -29,9 +30,12 @@ const Login = () => {
                 withCredentials: true
             }
         ).then((res) => {
+           toast.success(res.data.message)
             console.log(res);
-            navigate("/");
+            sessionStorage.setItem('user',JSON.stringify(res?.data?.user))
+            navigate('/')
         }).catch((err) => {
+            toast.error('Invalid password')
             console.error(err);
         }).finally(() => {
             setSubmitting(false);

@@ -28,3 +28,16 @@
 /* Stronger contrast overrides for minimal theme */
 .chat-layout.minimal .sidebar-search input[type="search"] { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:10px; }
 .chat-layout.minimal .small-btn { background:#0f0f0f; color:#fff; border-color: rgba(255,255,255,0.08); }
+.logout {background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  /* Smooth transition for all properties */
+  transition: all 0.3s ease; }
+  .logout:hover {
+  background-color: #0056b3; /* Darker shade */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Added depth */
+  transform: translateY(-2px); /* Slight lift */
+}
